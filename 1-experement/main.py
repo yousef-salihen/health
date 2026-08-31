@@ -1,10 +1,5 @@
-import numpy as np
 from model.preprocessing import load_data, handle_missing_values, check_correlation, apply_Zscoring, encode_labels
 from model.model import train_logistic_regression, evaluate_model
-
-
-
-
 def main():
     # load the dataset
     X_train, Y_train, X_test, Y_test = load_data()
@@ -23,6 +18,5 @@ def main():
     lr_auc = evaluate_model(lr_model, X_trainScaled, Y_trainEncoded)
     results['Logistic Regression'] = lr_auc
     print(f"Logistic Regression AUC-ROC !!!: {lr_auc :.4f}")
-
 if __name__ == "__main__":
     main()

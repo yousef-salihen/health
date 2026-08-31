@@ -1,10 +1,8 @@
 import pandas as pd
 import numpy as np
-
 #=========================================================================================================================================
 #load dataset
 #=========================================================================================================================================
-
 def load_data():
     # Load the dataset from CSV files
     train_df = pd.read_csv('/Users/yousefsalihen/Study/full_pipline/health_condition/dataset/train.csv')
@@ -19,10 +17,10 @@ def load_data():
     print(f"training data : {X_train.shape[0]} samples, {X_train.shape[1]} features")
     print(f"testing data : {X_test.shape[0]} samples, {X_test.shape[1]} features")
 
-
     return X_train, Y_train, X_test, Y_test
-
-
+#=========================================================================================================================================
+#sperate numeric and categorical features and combine them back together
+#=========================================================================================================================================
 def seprete_numeric_categorical(X):
     #seprete the numeric and categorical features
     x_numeric = X[:, :7].astype(float)
@@ -58,7 +56,6 @@ def handle_missing_values(X_train, X_test, strategy='mean'):
     X_train = np.hstack((x_numeric_train, x_categorical_train))
     X_test = np.hstack((x_numeric_test, x_categorical_test))
     return X_train, X_test
-
 #==========================================================================================================================================
 #correlation analysis
 #==========================================================================================================================================
@@ -116,7 +113,6 @@ def encode_labels(Y):
 #==========================================================================================================================================
 #Z-score normalization
 #==========================================================================================================================================
-
 def apply_Zscoring (X_train, X_test):
     print('\napply Z-score normlization')
     # separate the numeric and categorical features
@@ -133,4 +129,3 @@ def apply_Zscoring (X_train, X_test):
     X_test_scaled = combine_numeric_categorical(X_test, X_categorical_test)
 
     return X_train_scaled, X_test_scaled
-
