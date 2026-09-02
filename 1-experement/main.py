@@ -15,7 +15,7 @@ def main():
     results = {}
     #classification logestic
     lr_model = train_logistic_regression(X_trainScaled, Y_trainEncoded, penalty='l2', C=1.0)
-    lr_auc = evaluate_model(lr_model, X_trainScaled, Y_trainEncoded)
+    lr_auc = evaluate_model(lr_model, X_testScaled, Y_testEncoded)
     results['Logistic Regression'] = lr_auc
     print(f"Logistic Regression AUC-ROC !!!: {lr_auc :.4f}")
 if __name__ == "__main__":
