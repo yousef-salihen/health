@@ -1,9 +1,12 @@
-from model.preprocessing import load_data, handle_missing_values, balance_dataset, detect_and_remove_outliers, z_score_normalization
+from model.preprocessing import load_data, handle_missing_values, balance_dataset, detect_and_remove_outliers, z_score_normalization, encode_labels
 from model.model import train_adaline, evaluate_model
 
 def main():
     # load the dataset
     x_train, y_train, x_test, y_test = load_data()
+    x, y, x1, y1 = load_data() 
+    x, x1 = handle_missing_values(x, x1, strategy='mean')
+    x = z_score_normalization(x)
     # clean the dataset
     x_train, y_train = balance_dataset(x_train, y_train)
     # fill in miss values
@@ -13,9 +16,10 @@ def main():
     # normalization
     x_train = z_score_normalization(x_train)
     x_test = z_score_normalization(x_test)
+    y_la = encode_labels(y)
     # classification Adaline model
-    adaline_model = train_adaline(x_train, y_train, learning_rate=0.01, n_iter=1000)
-    adaline_auc = evaluate_model(adaline_model, x_train, y_train)
+    adaline_model = train_adaline(x, y_la, learning_rate=0.01, n_iter=1000)
+    adaline_auc = evaluate_model(adaline_model, x, y_la)
     print(f"Adaline AUC-ROC: {adaline_auc:.4f}")
 
 
